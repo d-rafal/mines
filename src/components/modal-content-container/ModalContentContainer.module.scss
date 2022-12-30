@@ -1,0 +1,7 @@
+@use "../../style/variables" as *;
+
+.root {
+  border-top-left-radius: $modal-border-radius;
+  border-top-right-radius: $modal-border-radius;
+  background-color: var(--background-color);
+}

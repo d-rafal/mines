@@ -1,0 +1,63 @@
+@use "../../style/variables" as *;
+
+.header {
+  background-color: var(--header-background-color);
+  border-top-left-radius: $modal-border-radius;
+  border-top-right-radius: $modal-border-radius;
+  position: relative;
+
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.content {
+  min-height: 25rem;
+  padding: 0 2rem 1rem;
+}
+
+.closeBtn {
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1rem;
+
+  border: 0;
+  border-radius: 100%;
+}
+
+.icon {
+  font-size: 1.5rem;
+}
+
+.selectSections {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.select {
+  width: 13rem;
+  margin-left: 0.7rem;
+}
+
+.tableHeader {
+  font-weight: bold;
+}
+
+.rankHeader {
+  width: 100px;
+}
+
+.timeHeader {
+  width: 300px;
+}
+
+.playerHeader {
+  width: 100px;
+}

@@ -1,0 +1,73 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--game-cell-background-color);
+
+  border: 1px solid var(--game-cell-border-color);
+  border-radius: 1px;
+
+  height: var(--cell-dimension);
+  aspect-ratio: 1 / 1;
+
+  user-select: none;
+
+  font-size: var(--cell-font-size);
+  color: var(--game-cell-text-color);
+
+  pointer-events: inherit;
+}
+
+.empty {
+  background-color: var(--game-cell-empty-background-color);
+}
+
+.unrevealed,
+.marked,
+.uncertainMark {
+  &:hover {
+    background: var(--game-cell-hover-background-color);
+  }
+}
+
+.fault,
+.wrongMark {
+  color: var(--game-cell-fault-text-color);
+  background-color: var(--game-cell-fault-background-color);
+}
+
+.correctMark {
+  color: var(--game-cell-correct-mark-text-color);
+}
+
+.oneBomb {
+  background-color: var(--game-cell-one-mine-background-color);
+}
+
+.twoBombs {
+  background-color: var(--game-cell-two-mines-background-color);
+}
+
+.threeBombs {
+  background-color: var(--game-cell-three-mines-background-color);
+}
+
+.fourBombs {
+  background-color: var(--game-cell-four-mines-background-color);
+}
+
+.fiveBombs {
+  background-color: var(--game-cell-five-mines-background-color);
+}
+
+.sixBombs {
+  background-color: var(--game-cell-six-mines-background-color);
+}
+
+.sevenBombs {
+  background-color: var(--game-cell-seven-mines-background-color);
+}
+
+.eightBombs {
+  background-color: var(--game-cell-eight-mines-background-color);
+}

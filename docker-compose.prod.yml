@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  server:
+    # image: node:16.17.1
+    build:
+      context: .
+      dockerfile: DockerfilePord
+    # command: sh -c "npm install && npm start"
+    # restart: always
+    ports:
+      - 5010:80
+    # working_dir: /server
+    environment:
+      TSC_COMPILE_ON_ERROR: false
+      HTTPS: false
+      INLINE_RUNTIME_CHUNK: false

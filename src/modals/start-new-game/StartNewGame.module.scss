@@ -1,0 +1,26 @@
+@use "../../style/variables" as *;
+
+.root {
+  border-radius: $modal-border-radius;
+  overflow: hidden;
+}
+
+.information {
+  display: flex;
+  column-gap: 2rem;
+  padding: 2rem 2.5rem;
+}
+
+.icon {
+  font-size: 3rem;
+}
+
+.text {
+  font-size: 1.1rem;
+  text-align: center;
+
+  p:first-of-type {
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+  }
+}

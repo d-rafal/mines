@@ -1,0 +1,48 @@
+@use "../../style/variables" as *;
+
+$grid-gap: 1rem;
+
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.form {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.formElement {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+
+  > label {
+    margin-top: 0.44rem;
+    margin-right: 1rem;
+  }
+}
+
+.submitBtn {
+  border: 0;
+  border-radius: 0.4rem;
+
+  margin-top: 0.2rem;
+  margin-bottom: 0.4rem;
+
+  background-color: var(--btn-green-background-color);
+  padding: 0.4rem 1rem;
+
+  &:hover {
+    background-color: var(--btn-green-hover-background-color);
+  }
+}
+
+.cancelBtn {
+  border-radius: 0.4rem;
+  padding: 0.4rem 1rem;
+}

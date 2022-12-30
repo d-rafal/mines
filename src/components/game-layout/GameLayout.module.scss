@@ -1,0 +1,43 @@
+.root {
+  position: relative;
+  // height: 100%;
+
+  // flex-grow: 1;
+  // padding-top: 100%;
+  // width: 100%;
+  // position: relative;
+  // aspect-ratio: 1 / 1;
+}
+
+.cellsLayout {
+  --rows-size: 16;
+  --columns-size: 16;
+  --game-layout-border-width: 1px;
+  // width: 100%;
+  // aspect-ratio: 1 / 1;
+
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+  // bottom: 0;
+  // right: 0;
+
+  // width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(var(--columns-size), 1fr);
+  grid-template-rows: repeat(var(--row-size), 1fr);
+
+  border: var(--game-layout-border-width) solid black;
+}
+
+.layoutBackdrop {
+  position: absolute;
+  inset: 0 0 0 0;
+  background-color: var(--game-cell-background-color);
+  font-size: 3rem;
+}
+
+.inactive {
+  pointer-events: none;
+}

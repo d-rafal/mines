@@ -1,0 +1,114 @@
+$vertical-padding: 0.3rem;
+
+.select {
+  position: relative;
+  display: inline-block;
+
+  font-size: 1.125rem;
+  font-family: inherit;
+
+  box-sizing: border-box;
+
+  padding: 0.1rem 2.5rem 0.2rem 0.5rem;
+
+  cursor: pointer;
+
+  border: 1px solid var(--btn-border-color);
+  border-radius: 0.4rem;
+  // box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.45);
+
+  background-color: var(--btn-background-color);
+
+  &.active,
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 3px 1px var(--focus-border);
+  }
+
+  &::after {
+    content: "▼";
+    position: absolute;
+    display: flex;
+
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0.6rem;
+
+    box-sizing: border-box;
+
+    // height: 100%;
+    // width: 2rem;
+    // padding-top: 0.1rem;
+
+    // border-radius: 0 0.1rem 0.1rem 0;
+
+    text-align: center;
+  }
+}
+
+.value {
+  display: inline-block;
+  width: 100%;
+  padding: $vertical-padding 0 $vertical-padding 0.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: top;
+}
+
+.optList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  z-index: 2;
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  /* If the values are smaller than the control, the list of options
+     will be as wide as the control itself */
+  min-width: 100%;
+
+  /* In case the list is too long, its content will overflow vertically
+     (which will add a vertical scrollbar automatically) but never horizontally
+     (because we haven't set a width, the list will adjust its width automatically.
+     If it can't, the content will be truncated) */
+  max-height: 10rem; /* 100px */
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  border: 0.2rem solid var(--btn-border-color);
+  border-top-width: 0.1rem;
+  border-radius: 0 0 0.4rem 0.4rem;
+
+  background: var(--select-optList-background-color);
+
+  &.hidden {
+    max-height: 0;
+    visibility: hidden;
+  }
+}
+
+.option {
+  padding: 0.2rem 0.3rem;
+}
+
+.selected {
+  background: #0d761d;
+}
+
+.highlight {
+  background-color: var(--btn-background-color);
+}
+
+.hiddenInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}

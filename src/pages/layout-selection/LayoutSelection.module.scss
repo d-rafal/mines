@@ -1,0 +1,23 @@
+@use "../../style/variables" as *;
+
+$btn-border-width: 2px;
+$btn-max-size: 25rem;
+$grid-gap: 1rem;
+
+.root {
+  display: grid;
+  gap: $grid-gap;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  padding: $grid-gap;
+  height: 100%;
+}
+
+.selectBtn {
+  width: calc((100vh - $header-hight - 3 * $grid-gap) / 2);
+  padding: 0;
+
+  &:nth-of-type(odd) {
+    justify-self: end;
+  }
+}

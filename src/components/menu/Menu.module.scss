@@ -1,0 +1,43 @@
+@use "../../style/variables" as *;
+
+.root {
+  position: relative;
+  background-color: var(--menu-background-color);
+  border: 2px solid var(--menu-border-color);
+  border-radius: 0.7rem;
+}
+
+.triangle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(calc(-50% - 1px)) rotate(45deg);
+
+  height: 20px;
+  width: 20px;
+
+  background-color: var(--menu-background-color);
+  border: 2px solid var(--menu-border-color);
+  border-bottom: 0;
+  border-right: 0;
+}
+
+.container {
+  position: relative;
+  min-width: 10rem;
+
+  z-index: 1;
+  padding: 0.7rem;
+}
+
+.menuItem {
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.2rem;
+
+  &:hover {
+    background-color: var(--menu-hover-background-color);
+  }
+
+  &:not(:last-of-type) {
+    margin-bottom: 0.1rem;
+  }
+}

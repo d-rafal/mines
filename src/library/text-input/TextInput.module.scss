@@ -1,0 +1,25 @@
+.root {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.input {
+  appearance: none;
+  border: 1px solid var(--text-input-border-color);
+  border-radius: 0.4rem;
+  outline: none;
+  background-color: var(--text-input-background-color);
+  margin-right: 0.4rem;
+  padding: 0.5rem 0.6rem;
+
+  font-size: 1rem;
+  color: inherit;
+  caret-color: inherit;
+}
+
+.errorMessage {
+  padding-left: 0.4rem;
+  text-align: left;
+  font-size: 1rem;
+  color: var(--digital-input-error-message-text-color);
+}

@@ -1,0 +1,16 @@
+@use "../../style/variables" as *;
+
+.root {
+  height: $header-hight;
+  position: relative;
+  background-color: var(--header-background-color);
+  border-bottom: 2px solid var(--header-border-color);
+  font-weight: bold;
+}
+
+.menuBtn {
+  padding: 0.2rem 0.4rem;
+  font-size: 1.6rem;
+  position: absolute;
+  right: 1rem;
+}
