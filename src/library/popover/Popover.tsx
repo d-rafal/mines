@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import debounce from "../../utilities/debounce";
 import { findFirstFocusableElement } from "../../utilities/findFirstFocusableElement";
 import { findLastFocusableElement } from "../../utilities/findLastFocusableElement";
 import { isHTMLElement } from "../../utilities/isHTMLElement";
@@ -16,9 +17,7 @@ declare module "csstype" {
 
     // Add a CSS Custom Property
     "--position-left"?: string;
-    // "--position-right"?: string;
     "--position-top"?: string;
-    // "--position-bottom"?: string;
 
     // ...or allow any other property
     // [index: string]: any;
@@ -31,9 +30,7 @@ interface PopoverProps {
   anchorEl: HTMLElement | null;
   positionOffset: {
     left?: number;
-    // right?: number;
     top?: number;
-    // bottom?: number;
   };
   onClose?: () => void;
   shouldFocusRoot?: boolean;
@@ -46,12 +43,7 @@ const mockFn = () => {};
 const Popover = ({
   shouldShowPopover,
   anchorEl,
-  positionOffset: {
-    left: posLeftOffset = 0,
-    // right: posRightOffset = 0,
-    top: posTopOffset = 0,
-    // bottom: posBottomOffset = 0,
-  },
+  positionOffset: { left: posLeftOffset = 0, top: posTopOffset = 0 },
   onClose = mockFn,
   shouldCloseOnEsc = true,
   shouldCloseOnClickOutside = true,
@@ -64,30 +56,33 @@ const Popover = ({
 
   const [position, setPosition] = useState({
     left: posLeftOffset,
-    // right: posRightOffset,
     top: posTopOffset,
-    // bottom: posBottomOffset,
   });
 
   const [isPortalAdded, setIsPortalAdded] = useState(false);
 
   useLayoutEffect(() => {
-    if (anchorEl) {
-      const {
-        left: anchorElLeftPos,
-        // right: anchorElRightPos,
-        top: anchorElTopPos,
-        // bottom: anchorElBottomPos,
-      } = anchorEl.getBoundingClientRect();
+    const calcPosition = debounce(() => {
+      if (anchorEl) {
+        const { left: anchorElLeftPos, top: anchorElTopPos } =
+          anchorEl.getBoundingClientRect();
 
-      setPosition({
-        left: posLeftOffset + anchorElLeftPos,
-        // right: posRightOffset + anchorElRightPos,
-        top: posTopOffset + anchorElTopPos,
-        // bottom: posBottomOffset + anchorElBottomPos,
-      });
+        setPosition({
+          left: posLeftOffset + anchorElLeftPos,
+          top: posTopOffset + anchorElTopPos,
+        });
+      }
+    }, 100);
+
+    if (isPortalAdded) {
+      window.addEventListener("resize", calcPosition);
+      calcPosition();
     }
-  }, [anchorEl, posLeftOffset, posTopOffset]);
+
+    return () => {
+      window.removeEventListener("resize", calcPosition);
+    };
+  }, [isPortalAdded, anchorEl, posLeftOffset, posTopOffset]);
 
   useEffect(() => {
     if (shouldFocusRoot && isPortalAdded) {
@@ -149,9 +144,7 @@ const Popover = ({
             className={styles.container}
             style={{
               "--position-left": position.left + "px",
-              // "--position-right": position.right + "px",
               "--position-top": position.top + "px",
-              // "--position-bottom": position.bottom + "px",
             }}
           >
             {children}

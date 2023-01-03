@@ -7,12 +7,15 @@ import { GAME_CONFIG_SLICE_NAME } from "./features/game-config/consts";
 import gameConfigReducer from "./features/game-config/gameConfigSlice";
 import { LAYOUT_CONFIG_SLICE_NAME } from "./features/layout-config/consts";
 import layoutConfigReducer from "./features/layout-config/layoutConfigSlice";
+import { SHOW_ELEMENTS_SLICE_NAME } from "./features/show-elemetns/consts";
+import showElementsReducer from "./features/show-elemetns/showElementsSlice";
 
 const extraArgument = null;
 
 const rootReducer = combineReducers({
   [GAME_CONFIG_SLICE_NAME]: gameConfigReducer,
   [LAYOUT_CONFIG_SLICE_NAME]: layoutConfigReducer,
+  [SHOW_ELEMENTS_SLICE_NAME]: showElementsReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {

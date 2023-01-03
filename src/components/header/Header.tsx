@@ -1,27 +1,32 @@
 import cx from "classnames";
-import { FLEX_CENTER_CLASS_NAME } from "../../style/consts";
-import styles from "./Header.module.scss";
-
 import { useState } from "react";
 import { MdMenu } from "react-icons/md";
+import { hideBestResultsActionCreator } from "../../app/store/features/show-elemetns/action-creators/hideBestResultsActionCreator";
+import { useSelectShouldShowBestResults } from "../../app/store/features/show-elemetns/showElementsSlice";
+import { useAppDispatch } from "../../app/store/hooks/hooks";
 import Button from "../../library/button/Button";
+import Modal from "../../library/modal/Modal";
 import Popover from "../../library/popover/Popover";
+import BestResults from "../../modals/best-results/BestResults";
+import { FLEX_CENTER_CLASS_NAME } from "../../style/consts";
 import Menu from "../menu/Menu";
-
-// import { ReactComponent as DeleteSvg } from "../../assets/img/menu.svg";
+import styles from "./Header.module.scss";
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
+  const dispatch = useAppDispatch();
+  const shouldShowBestResults = useSelectShouldShowBestResults();
+
   const shouldShowPopover = Boolean(anchorEl);
 
   const onCloseMenu = () => {
-    console.log("header onCloseMenu 1");
     setAnchorEl(null);
-    console.log("header onCloseMenu 2");
   };
 
-  console.log("Header rendering");
+  const onBestTimeModalClose = () => {
+    dispatch(hideBestResultsActionCreator);
+  };
 
   return (
     <div className={cx(FLEX_CENTER_CLASS_NAME, styles.root)}>
@@ -29,11 +34,7 @@ const Header = () => {
       <Button
         customizedClassName={styles.menuBtn}
         onClick={(e) => {
-          // e.stopPropagation();
-
-          console.log("header onClick 1");
           setAnchorEl(e.currentTarget);
-          console.log("header onClick 2");
         }}
       >
         <MdMenu aria-hidden="true" role="img" />
@@ -41,11 +42,16 @@ const Header = () => {
       <Popover
         anchorEl={anchorEl}
         shouldShowPopover={shouldShowPopover}
-        positionOffset={{ left: -200, top: 40 }}
+        positionOffset={{ left: -116, top: 48 }}
         onClose={onCloseMenu}
       >
-        <Menu />
+        <Menu triangleLeftPosition={6} onClose={onCloseMenu} />
       </Popover>
+      {shouldShowBestResults && (
+        <Modal onClose={onBestTimeModalClose}>
+          <BestResults onClose={onBestTimeModalClose} />
+        </Modal>
+      )}
     </div>
   );
 };

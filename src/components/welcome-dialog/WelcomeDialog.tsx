@@ -1,17 +1,20 @@
-import { useState } from "react";
-import Modal from "../../library/modal/Modal";
-import styles from "./WelcomeDialog.module.scss";
+import { MdClose } from "react-icons/md";
+import { hideWelcomeDialogActionCreator } from "../../app/store/features/show-elemetns/action-creators/hideWelcomeDialogActionCreator";
+import { useSelectShouldShowWelcomeDialog } from "../../app/store/features/show-elemetns/showElementsSlice";
+import { useAppDispatch } from "../../app/store/hooks/hooks";
 import ModalContentContainer from "../../components/modal-content-container/ModalContentContainer";
 import Button from "../../library/button/Button";
-import { MdClose } from "react-icons/md";
+import Modal from "../../library/modal/Modal";
+import styles from "./WelcomeDialog.module.scss";
 
 const WelcomeDialog = () => {
-  const [shouldDhowWelcomeDialog, setShouldShowWelcomeDialog] = useState(true);
+  const shouldShowWelcomeDialog = useSelectShouldShowWelcomeDialog();
+  const dispatch = useAppDispatch();
 
   const onCloseWelcomeDialogHandle = () => {
-    setShouldShowWelcomeDialog(false);
+    dispatch(hideWelcomeDialogActionCreator);
   };
-  return shouldDhowWelcomeDialog ? (
+  return shouldShowWelcomeDialog ? (
     <Modal onClose={onCloseWelcomeDialogHandle}>
       <ModalContentContainer>
         <div className={styles.header}>

@@ -1,4 +1,5 @@
 import { forwardRef, useState } from "react";
+import { BsClock } from "react-icons/bs";
 import { restartGameActionCreator } from "../../app/store/features/game-config/action-creators/restartGameActionCreator";
 import { switchToActiveActionCreator } from "../../app/store/features/game-config/action-creators/switchToActiveActionCreator";
 import { switchToIdleActionCreator } from "../../app/store/features/game-config/action-creators/switchToIdleActionCreator";
@@ -9,13 +10,12 @@ import {
   useSelectMinesStatus,
   useSelectPausedByPauseBtn,
 } from "../../app/store/features/game-config/gameConfigSlice";
+import { showBestResults } from "../../app/store/features/show-elemetns/showElementsSlice";
 import { useAppDispatch } from "../../app/store/hooks/hooks";
 import Button from "../../library/button/Button";
 import Modal from "../../library/modal/Modal";
-import BestResults from "../../modals/best-results/BestResults";
 import StartNewGame from "../../modals/start-new-game/StartNewGame";
 import styles from "./SideBar.module.scss";
-import { BsClock } from "react-icons/bs";
 import { convertMsToMinutesSecondsString } from "./utilities/convertMsToMinutesSecondsString";
 
 interface SideBarProps {}
@@ -31,7 +31,6 @@ const SideBar = forwardRef<HTMLDivElement, SideBarProps>((_, ref) => {
   const [isStartOverModalOpen, setIsStartOverModalOpen] = useState(false);
   const [isChangeDifficultyModalOpen, setIsChangeDifficultyModalOpen] =
     useState(false);
-  const [isBestTimesModalOpen, setIsBestTimesModalOpen] = useState(false);
 
   const gameStatus = useSelectGameStatus();
 
@@ -74,12 +73,8 @@ const SideBar = forwardRef<HTMLDivElement, SideBarProps>((_, ref) => {
 
   const onBestTimesHandle = () => {
     if (shouldShowBestTimesBtn) {
-      setIsBestTimesModalOpen(true);
+      dispatch(showBestResults());
     }
-  };
-
-  const onBestTimeModalClose = () => {
-    setIsBestTimesModalOpen(false);
   };
 
   const onChangeDifficultyHandle = () => {
@@ -185,11 +180,6 @@ const SideBar = forwardRef<HTMLDivElement, SideBarProps>((_, ref) => {
               dispatch(switchToIdleActionCreator);
             }}
           />
-        </Modal>
-      )}
-      {isBestTimesModalOpen && (
-        <Modal onClose={onBestTimeModalClose}>
-          <BestResults onClose={onBestTimeModalClose} />
         </Modal>
       )}
     </>
