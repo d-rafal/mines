@@ -1,9 +1,23 @@
-import { render, screen } from "../../../setupTests";
-import userEvent from "@testing-library/user-event";
-import Select from "../Select";
-import { AllowedValues, mockOptions } from "./mockOptions";
 import { nanoid } from "@reduxjs/toolkit";
+import userEvent from "@testing-library/user-event";
 import { useState } from "react";
+import { render, screen } from "../../../setupTests";
+import Select, { Option } from "../Select";
+
+export type AllowedValues =
+  | "Cherry"
+  | "Lemon"
+  | "Banana"
+  | "Strawberry"
+  | "Apple";
+
+export const mockOptions: Option<AllowedValues>[] = [
+  { value: "Cherry", text: "Cherry" },
+  { value: "Lemon", text: "Lemon" },
+  { value: "Banana", text: "Banana" },
+  { value: "Strawberry", text: "Strawberry" },
+  { value: "Apple", text: "Apple" },
+];
 
 describe("Select tests", () => {
   const testId = nanoid();
@@ -31,18 +45,16 @@ describe("Select tests", () => {
     );
   };
 
-  it("should render initial selected option", () => {
+  it("should render initial selected option", async () => {
     // arrange
+    const user = userEvent.setup();
+
     render(<Sut />);
 
+    const rootElement = screen.getByRole("listbox");
     const valueIndicator = screen.getByTestId(testId + "_valueIndicator", {
       suggest: false,
     });
-
-    const selectedOption = screen.getByRole("option", {
-      name: mockOptions[0].text,
-    });
-
     const valueContainer = screen.getByRole("textbox", {
       hidden: true,
     }) as HTMLInputElement;
@@ -60,17 +72,28 @@ describe("Select tests", () => {
       mockOptions[initialSelectedOptionIndex].value
     );
 
+    await user.pointer({ keys: "[MouseLeft]", target: rootElement });
+
+    const selectedOption = screen.getByRole("option", {
+      name: mockOptions[0].text,
+    });
+
     expect(selectedOption).toBeInTheDocument();
     expect(selectedOption.getAttribute("aria-selected")).toBe("true");
   });
 
-  it("should render all options option", () => {
+  it("should render all options option", async () => {
     // arrange
+    const user = userEvent.setup();
+
     render(<Sut />);
 
     //act
 
     // assert
+    const rootElement = screen.getByRole("listbox");
+    await user.pointer({ keys: "[MouseLeft]", target: rootElement });
+
     mockOptions.forEach((option) => {
       const optionElement = screen.getByRole("option", { name: option.text });
 

@@ -197,7 +197,7 @@ const Select = <T extends string>({
             role="option"
             aria-selected={element.value === selectedOption}
             // tabIndex={-1}
-            aria-hidden="true"
+            aria-hidden={isOpen ? false : true}
           >
             {element.text}
           </li>

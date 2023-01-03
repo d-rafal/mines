@@ -6,7 +6,12 @@ import { useState } from "react";
 describe("Modal tests", () => {
   const setIsModalOpenMock = jest.fn();
 
-  const children = "rendered children";
+  const children = (
+    <>
+      <button>first button</button>
+      <button>last button</button>
+    </>
+  );
 
   const createModalElement = (
     setIsModalOpen: React.Dispatch<
@@ -40,7 +45,9 @@ describe("Modal tests", () => {
     // act
 
     // assert
-    expect(screen.getByText(children)).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /^first button$/i })
+    ).toBeInTheDocument();
   });
 
   it("should focus root element", () => {
@@ -83,19 +90,19 @@ describe("Modal tests", () => {
     // eslint-disable-next-line testing-library/no-node-access
     const rootElement = baseElement.children[1]?.firstChild;
 
-    const btnClose = screen.getByRole("button", { name: /^CloseModal$/i });
+    const firstButton = screen.getByRole("button", { name: /^first button$/i });
 
     // act
 
     // assert
     // eslint-disable-next-line testing-library/no-node-access
     expect(rootElement).toBeInTheDocument();
-    expect(btnClose).toBeInTheDocument();
+    expect(firstButton).toBeInTheDocument();
 
     expect(rootElement).toHaveFocus();
 
     await user.keyboard("{Tab}");
-    expect(btnClose).toHaveFocus();
+    expect(firstButton).toHaveFocus();
   });
 
   it("should focus last focusable element from root", async () => {
@@ -106,18 +113,18 @@ describe("Modal tests", () => {
     // eslint-disable-next-line testing-library/no-node-access
     const rootElement = baseElement.children[1]?.firstChild;
 
-    const btnCancel = screen.getByRole("button", { name: /^CloseModal2$/i });
+    const lastButton = screen.getByRole("button", { name: /^last button$/i });
 
     // act
 
     // assert
     expect(rootElement).toBeInTheDocument();
-    expect(btnCancel).toBeInTheDocument();
+    expect(lastButton).toBeInTheDocument();
 
     expect(rootElement).toHaveFocus();
 
     await user.keyboard("{Shift>}{Tab}{/Shift}");
-    expect(btnCancel).toHaveFocus();
+    expect(lastButton).toHaveFocus();
   });
 
   it("should trap focus", async () => {
@@ -128,77 +135,35 @@ describe("Modal tests", () => {
     // eslint-disable-next-line testing-library/no-node-access
     const rootElement = baseElement.children[1]?.firstChild;
 
-    const btnClose = screen.getByRole("button", { name: /^CloseModal$/i });
-    const btnCancel = screen.getByRole("button", { name: /^CloseModal2$/i });
+    const firstButton = screen.getByRole("button", { name: /^first button$/i });
+    const lastButton = screen.getByRole("button", { name: /^last button$/i });
 
     // act
 
     // assert
     expect(rootElement).toBeInTheDocument();
-    expect(btnClose).toBeInTheDocument();
-    expect(btnCancel).toBeInTheDocument();
+    expect(firstButton).toBeInTheDocument();
+    expect(lastButton).toBeInTheDocument();
 
     expect(rootElement).toHaveFocus();
 
     await user.keyboard("{Tab}");
-    expect(btnClose).toHaveFocus();
+    expect(firstButton).toHaveFocus();
 
     await user.keyboard("{Tab}");
-    expect(btnCancel).toHaveFocus();
+    expect(lastButton).toHaveFocus();
 
     await user.keyboard("{Tab}");
-    expect(btnClose).toHaveFocus();
+    expect(firstButton).toHaveFocus();
 
     await user.keyboard("{Shift>}{Tab}{/Shift}");
-    expect(btnCancel).toHaveFocus();
+    expect(lastButton).toHaveFocus();
 
     await user.keyboard("{Shift>}{Tab}{/Shift}");
-    expect(btnClose).toHaveFocus();
+    expect(firstButton).toHaveFocus();
 
     await user.keyboard("{Shift>}{Tab}{/Shift}");
-    expect(btnCancel).toHaveFocus();
-  });
-
-  it("should close modal when close button pressed", async () => {
-    // arrange
-    const user = userEvent.setup();
-    render(<Sut />);
-
-    const btnClose = screen.getByRole("button", { name: /^CloseModal$/i });
-
-    // act
-
-    // assert
-    expect(screen.getByText(children)).toBeInTheDocument();
-    expect(btnClose).toBeInTheDocument();
-
-    await user.pointer({
-      keys: "[MouseLeft]",
-      target: btnClose,
-    });
-
-    expect(screen.queryByText(children)).not.toBeInTheDocument();
-  });
-
-  it("should close modal when cancel button pressed", async () => {
-    // arrange
-    const user = userEvent.setup();
-    render(<Sut />);
-
-    const btnCancel = screen.getByRole("button", { name: /^CloseModal2$/i });
-
-    // act
-
-    // assert
-    expect(screen.getByText(children)).toBeInTheDocument();
-    expect(btnCancel).toBeInTheDocument();
-
-    await user.pointer({
-      keys: "[MouseLeft]",
-      target: btnCancel,
-    });
-
-    expect(screen.queryByText(children)).not.toBeInTheDocument();
+    expect(lastButton).toHaveFocus();
   });
 
   it("should focus on last focused element before opening modal", async () => {
@@ -207,11 +172,13 @@ describe("Modal tests", () => {
     const { baseElement } = render(<Sut shouldOpenModalOnMount={false} />);
 
     const btnOpenModal = screen.getByRole("button", { name: /open modal/i });
+    // eslint-disable-next-line testing-library/no-node-access
+    let modalRootElement = baseElement.children[1]?.firstChild;
 
     // act
 
     // assert
-    expect(screen.queryByText(children)).not.toBeInTheDocument();
+    expect(modalRootElement).toBeUndefined();
     expect(btnOpenModal).toBeInTheDocument();
     expect(btnOpenModal).not.toHaveFocus();
 
@@ -219,21 +186,22 @@ describe("Modal tests", () => {
     expect(btnOpenModal).toHaveFocus();
 
     await user.keyboard("{Enter}");
-    expect(screen.getByText(children)).toBeInTheDocument();
 
     // eslint-disable-next-line testing-library/no-node-access
-    const rootElement = baseElement.children[1]?.firstChild;
-    expect(rootElement).toBeInTheDocument();
+    modalRootElement = baseElement.children[1]?.firstChild;
+    expect(modalRootElement).toBeInTheDocument();
 
-    expect(rootElement).toHaveFocus();
+    expect(modalRootElement).toHaveFocus();
     expect(btnOpenModal).not.toHaveFocus();
 
     await user.pointer({
       keys: "[MouseLeft]",
-      target: screen.getByRole("button", { name: /CloseModal$/i }),
+      target: modalRootElement as Element,
     });
 
-    expect(screen.queryByText(children)).not.toBeInTheDocument();
+    // eslint-disable-next-line testing-library/no-node-access
+    modalRootElement = baseElement.children[1]?.firstChild;
+    expect(modalRootElement).toBeUndefined();
     expect(btnOpenModal).toHaveFocus();
   });
 });

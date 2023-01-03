@@ -31,22 +31,6 @@ const layoutConfigSlice = createSlice({
 
       return newLayoutConfig;
     },
-    // cellClickHandled(
-    //   state,
-    //   action: PayloadAction<{ layoutConfig: LayoutConfig }>
-    // ) {
-    //   const { layoutConfig } = action.payload;
-
-    //   return layoutConfig;
-    // },
-    // cellContextMenuHandled(
-    //   state,
-    //   action: PayloadAction<{ layoutConfig: LayoutConfig }>
-    // ) {
-    //   const { layoutConfig } = action.payload;
-
-    //   return layoutConfig;
-    // },
     cellStatusUpdated(
       state,
       action: PayloadAction<{

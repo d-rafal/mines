@@ -7,8 +7,8 @@ import { GAME_CONFIG_SLICE_NAME } from "./features/game-config/consts";
 import gameConfigReducer from "./features/game-config/gameConfigSlice";
 import { LAYOUT_CONFIG_SLICE_NAME } from "./features/layout-config/consts";
 import layoutConfigReducer from "./features/layout-config/layoutConfigSlice";
-import { SHOW_ELEMENTS_SLICE_NAME } from "./features/show-elemetns/consts";
-import showElementsReducer from "./features/show-elemetns/showElementsSlice";
+import { SHOW_ELEMENTS_SLICE_NAME } from "./features/show-elements/consts";
+import showElementsReducer from "./features/show-elements/showElementsSlice";
 
 const extraArgument = null;
 

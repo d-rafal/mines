@@ -10,7 +10,7 @@ import {
   useSelectMinesStatus,
   useSelectPausedByPauseBtn,
 } from "../../app/store/features/game-config/gameConfigSlice";
-import { showBestResults } from "../../app/store/features/show-elemetns/showElementsSlice";
+import { showBestResults } from "../../app/store/features/show-elements/showElementsSlice";
 import { useAppDispatch } from "../../app/store/hooks/hooks";
 import Button from "../../library/button/Button";
 import Modal from "../../library/modal/Modal";

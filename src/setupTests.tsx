@@ -7,24 +7,24 @@ import "@testing-library/jest-dom";
 import { render, RenderOptions, configure } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { AppStore, RootState, setupStore } from "./app/store/store";
-// import ContextsProvider from "./components/contexts-provider/ContextsProvider";
-// import { server } from "./mocks/server";
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import { GAME_CONFIG_SLICE_NAME } from "./app/store/features/game-config/consts";
-import { initialState } from "./app/store/features/game-config/gameConfigSlice";
+import { initialState as gameConfigInitialState } from "./app/store/features/game-config/gameConfigSlice";
+import { initialState as showElementsInitialState } from "./app/store/features/show-elements/showElementsSlice";
 import { LAYOUT_CONFIG_SLICE_NAME } from "./app/store/features/layout-config/consts";
-// import ReportedMessages from "./components/reported-messages/ReportedMessages";
+import { SHOW_ELEMENTS_SLICE_NAME } from "./app/store/features/show-elements/consts";
 
 interface ExtendedRenderOptions
   extends Omit<RenderOptions, "wrapper" | "queries"> {
   preloadedState?: PreloadedState<RootState>;
   store?: AppStore;
-  initialRoutes?: string[] | null;
+  initialRoutes?: string[];
 }
 
 export const mockedStoreInitialState: PreloadedState<RootState> = {
-  [GAME_CONFIG_SLICE_NAME]: initialState,
+  [GAME_CONFIG_SLICE_NAME]: gameConfigInitialState,
   [LAYOUT_CONFIG_SLICE_NAME]: [],
+  [SHOW_ELEMENTS_SLICE_NAME]: showElementsInitialState,
 };
 
 export const renderWithProviders = (
@@ -32,7 +32,7 @@ export const renderWithProviders = (
   {
     preloadedState = mockedStoreInitialState,
     store = setupStore(preloadedState),
-    initialRoutes = null,
+    initialRoutes,
     ...renderOptions
   }: ExtendedRenderOptions = {}
 ) => {
@@ -47,23 +47,14 @@ export const renderWithProviders = (
       <BrowserRouter>{children}</BrowserRouter>
     );
 
-    return (
-      <Provider store={store}>
-        {/* <ContextsProvider> */}
-        {routerWrapper}
-        {/* <ReportedMessages /> */}
-        {/* </ContextsProvider> */}
-      </Provider>
-    );
+    return <Provider store={store}>{routerWrapper}</Provider>;
   };
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
 };
 
 configure({ throwSuggestions: true });
 
-beforeAll(() => {
-  // server.listen();
-});
+beforeAll(() => {});
 
 beforeEach(() => {
   // @ts-ignore
@@ -79,16 +70,12 @@ beforeEach(() => {
 afterEach(() => {
   window.ResizeObserver = ResizeObserver;
 
-  // server.resetHandlers();
-
   // jest.runOnlyPendingTimers();
   // jest.useRealTimers();
 
   jest.restoreAllMocks();
 });
-afterAll(() => {
-  // server.close();
-});
+afterAll(() => {});
 
 export * from "@testing-library/react";
 export { renderWithProviders as render };

@@ -1,10 +1,10 @@
 import cx from "classnames";
-import { showBestResultsActionCreator } from "../../app/store/features/show-elemetns/action-creators/showBestResultsActionCreator";
-import { showWelcomeDialogActionCreator } from "../../app/store/features/show-elemetns/action-creators/showWelcomeDialogActionCreator";
+import { showBestResultsActionCreator } from "../../app/store/features/show-elements/action-creators/showBestResultsActionCreator";
+import { showWelcomeDialogActionCreator } from "../../app/store/features/show-elements/action-creators/showWelcomeDialogActionCreator";
 import {
   showBestResults,
   showWelcomeDialog,
-} from "../../app/store/features/show-elemetns/showElementsSlice";
+} from "../../app/store/features/show-elements/showElementsSlice";
 import { useAppDispatch } from "../../app/store/hooks/hooks";
 import styles from "./Menu.module.scss";
 

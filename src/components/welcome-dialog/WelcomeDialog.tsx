@@ -1,6 +1,6 @@
 import { MdClose } from "react-icons/md";
-import { hideWelcomeDialogActionCreator } from "../../app/store/features/show-elemetns/action-creators/hideWelcomeDialogActionCreator";
-import { useSelectShouldShowWelcomeDialog } from "../../app/store/features/show-elemetns/showElementsSlice";
+import { hideWelcomeDialogActionCreator } from "../../app/store/features/show-elements/action-creators/hideWelcomeDialogActionCreator";
+import { useSelectShouldShowWelcomeDialog } from "../../app/store/features/show-elements/showElementsSlice";
 import { useAppDispatch } from "../../app/store/hooks/hooks";
 import ModalContentContainer from "../../components/modal-content-container/ModalContentContainer";
 import Button from "../../library/button/Button";

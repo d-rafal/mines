@@ -81,31 +81,7 @@ export const initialState: GameConfig = {
   timeAccumulated: 0,
   changeToActiveTime: null,
   intervalID: null,
-  bestResultsRoster: {
-    // "8 x 8, 10 mines": [
-    //   { time: 110, player: "rd" },
-    //   { time: 120, player: "rd" },
-    //   { time: 130, player: "rd" },
-    //   { time: 140, player: "rd" },
-    //   { time: 150, player: "rd" },
-    // ],
-    // "8 x 8, 11 mines": [
-    //   { time: 111, player: "rd" },
-    //   { time: 121, player: "rd" },
-    // ],
-    // "8 x 8, 12 mines": [
-    //   { time: 112, player: "rd" },
-    //   { time: 122, player: "rd" },
-    // ],
-    // "8 x 8, 13 mines": [
-    //   { time: 113, player: "rd" },
-    //   { time: 123, player: "rd" },
-    // ],
-    // "8 x 8, 14 mines": [
-    //   { time: 114, player: "rd" },
-    //   { time: 124, player: "rd" },
-    // ],
-  },
+  bestResultsRoster: {},
   rowsSize: 0,
   colsSize: 0,
   minesQn: 0,

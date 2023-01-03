@@ -11,10 +11,9 @@ import "@fontsource/roboto/700.css";
 
 import "./index.scss";
 import WelcomeDialog from "./components/welcome-dialog/WelcomeDialog";
+import { clearLocalStorageOnExit } from "./utilities/clearLocalStorageOnExit";
 
-window.addEventListener("click", () => {
-  console.log("window click");
-});
+clearLocalStorageOnExit();
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

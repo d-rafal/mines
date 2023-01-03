@@ -11,7 +11,6 @@ import styles from "./Modal.module.scss";
 
 interface ModalProps {
   children: JSX.Element;
-  // children: Exclude<React.ReactNode, undefined | null>;
   onClose?: () => void;
   shouldFocusRoot?: boolean;
   shouldCloseOnEsc?: boolean;
