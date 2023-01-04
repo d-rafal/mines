@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmines=self.webpackChunkmines||[]).push([[186],{2186:function(n,e,s){s.r(e),s.d(e,{default:function(){return c}});var t="NoMatch_root__DW1Pm",u=s(184),c=function(){return(0,u.jsx)("p",{className:t,children:"404"})}}}]);
+//# sourceMappingURL=186.cb624ee1.chunk.js.map
