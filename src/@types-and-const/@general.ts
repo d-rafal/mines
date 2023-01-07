@@ -47,14 +47,14 @@ export type RetrieveArrayElementType<ArrayType extends readonly unknown[]> =
 
 export type SetSearchParams = ReturnType<typeof useSearchParams>[1];
 
-export type OrNull<Type> = Type | null;
+export type Optional<Type> = Type | null;
 
 export type OrUndefined<Type> = Type | undefined;
 export type OrNullUndefined<Type> = Type | null | undefined;
 
 export type OneOrMany<Type> = Type | Type[];
 
-export type OneOrManyOrNull<Type> = OrNull<OneOrMany<Type>>;
+export type OneOrManyOrNull<Type> = Optional<OneOrMany<Type>>;
 
 export type OneOrManyOrNullStrings = OneOrManyOrNull<string>;
 

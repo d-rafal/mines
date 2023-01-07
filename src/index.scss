@@ -46,7 +46,8 @@ img {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
+  background-color: transparent;
+  // background-color: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
