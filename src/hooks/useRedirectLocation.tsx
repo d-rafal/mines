@@ -7,12 +7,21 @@ const useRedirectLocation = (defaultLocation?: string) => {
   let from = defaultLocation || "/";
 
   if (isLocationStateWithFromPropertyPath(location.state)) {
-    from =
-      location.state.from.pathname +
-      (location.state.from.search[0] === "?" ? "" : "?") +
-      location.state.from.search +
-      (location.state.from.hash[0] === "#" ? "" : "#") +
-      location.state.from.hash;
+    from = location.state.from.pathname;
+
+    if (location.state.from.search.length > 1) {
+      if (location.state.from.search[0] !== "?") {
+        from += "?";
+      }
+      from += location.state.from.search;
+    }
+
+    if (location.state.from.hash.length > 1) {
+      if (location.state.from.hash[0] !== "#") {
+        from += "#";
+      }
+      from += location.state.from.hash;
+    }
   }
 
   return from;

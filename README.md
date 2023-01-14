@@ -9,11 +9,6 @@ It's based on **Create React App** environment configuration, written in Typescr
 - react-hook-form
 - react-router
 
-You can start playing with it by entering following user credentials:
-
-- email: `user1@user.com`
-- password: `123456`
-
 Enjoy!
 
 ### Analyzing a code, you may find some useless comments. Normally I do not leave such things in production code, but this project I treat as a playground and own repository of some useful code.

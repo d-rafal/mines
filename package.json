@@ -32,7 +32,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "circ": "madge --circular --extensions ts,tsx,js,jsx ./",
+    "formatCode": "prettier --write .",
+    "formatCodeCheck": "prettier --check ."
   },
   "eslintConfig": {
     "extends": [
@@ -59,6 +62,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "gh-pages": "^4.0.0",
     "madge": "^5.0.1",
+    "prettier": "^2.8.3",
     "sass": "^1.55.0"
   },
   "homepage": "https://d-rafal.github.io/mines"
