@@ -1,4 +1,4 @@
-import _ from "lodash";
+import { cloneDeep } from "lodash-es";
 import type {
   CellData,
   LayoutConfig,
@@ -19,7 +19,7 @@ export const calcNewLayoutConfig = (
 ) => {
   let shallowLayoutConfigClone = getShallowLayoutConfigClone(layoutConfig);
 
-  const newCellDataClone = _.cloneDeep(
+  const newCellDataClone = cloneDeep(
     shallowLayoutConfigClone[pos.row][pos.col]
   );
 
